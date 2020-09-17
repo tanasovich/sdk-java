@@ -1,13 +1,16 @@
 package com.liqpay;
 
-import org.json.simple.JSONObject;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.*;
-
 import static com.liqpay.LiqPayUtil.base64_encode;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.json.simple.JSONObject;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class LiqPayTest {
 
@@ -23,10 +26,10 @@ public class LiqPayTest {
             "<input type=\"image\" src=\"//static.liqpay.ua/buttons/p1en.radius.png\" name=\"btn_text\" />\n" +
             "</form>\n";
 
-    LiqPay lp;
+    static LiqPay lp;
 
-    @Before
-    public void setUp(){
+    @BeforeAll
+    public static void setUp(){
         lp = new LiqPay("publicKey", "privateKey");
     }
 
@@ -72,22 +75,22 @@ public class LiqPayTest {
         assertEquals("Description", cnbParams.get("description"));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testCnbParamsTrowsNpeIfNotAmount() throws Exception {
         Map<String, String> params = defaultTestParams("amount");
-        lp.checkCnbParams(params);
+        assertThrows(NullPointerException.class, () -> lp.checkCnbParams(params));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testCnbParamsTrowsNpeIfNotCurrency() throws Exception {
         Map<String, String> params = defaultTestParams("currency");
-        lp.checkCnbParams(params);
+        assertThrows(NullPointerException.class, () -> lp.checkCnbParams(params));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testCnbParamsTrowsNpeIfNotDescription() throws Exception {
         Map<String, String> params = defaultTestParams("description");
-        lp.checkCnbParams(params);
+        assertThrows(NullPointerException.class, () -> lp.checkCnbParams(params));
     }
 
     @Test

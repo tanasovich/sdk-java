@@ -1,16 +1,19 @@
 package com.liqpay;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.junit.Test;
+import static com.liqpay.LiqPayUtil.base64_encode;
+import static com.liqpay.LiqPayUtil.getArray;
+import static com.liqpay.LiqPayUtil.parseJson;
+import static com.liqpay.LiqPayUtil.sha1;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static com.liqpay.LiqPayUtil.*;
-import static org.junit.Assert.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.junit.jupiter.api.Test;
 
 public class LiqPayUtilTest {
 
